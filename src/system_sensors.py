@@ -71,12 +71,13 @@ def get_last_boot():
     return str(as_local(utc_from_timestamp(psutil.boot_time())).isoformat())
 
 def on_message(client, userdata, message):
-    print (f"Message received: {message.payload.decode()}"  )
+    #print (f"Message received: {message.payload.decode()}"  )
     if(message.payload.decode() == "online"):
         send_config_message(client)
     
 
 def updateSensors():
+    print ("updateSensors")
     payload_str = (
         '{"temperature": '
         + get_temp()
@@ -111,7 +112,7 @@ def updateSensors():
             )
     payload_str = payload_str + "}"
     mqttClient.publish(
-        topic="system-sensors/sensor/" + deviceName + "/state",
+        topic="tel/19c/" + deviceName + "/state",
         payload=payload_str,
         qos=1,
         retain=False,
@@ -214,7 +215,7 @@ def send_config_message(mqttClient):
         topic="homeassistant/sensor/" + deviceName + "/" + deviceName + "Temp/config",
         payload='{"device_class":"temperature","name":"'
         + deviceName
-        + 'Temperature","state_topic":"system-sensors/sensor/'
+        + 'Temperature","state_topic":"tel/19c/'
         + deviceName
         + '/state","unit_of_measurement":"°C","value_template":"{{ value_json.temperature}}","unique_id":"'
         + deviceName.lower()
@@ -236,7 +237,7 @@ def send_config_message(mqttClient):
         + "DiskUse/config",
         payload='{"name":"'
         + deviceName
-        + 'DiskUse","state_topic":"system-sensors/sensor/'
+        + 'DiskUse","state_topic":"tel/19c/'
         + deviceName
         + '/state","unit_of_measurement":"%","value_template":"{{ value_json.disk_use}}","unique_id":"'
         + deviceName.lower()
@@ -258,7 +259,7 @@ def send_config_message(mqttClient):
         + "MemoryUse/config",
         payload='{"name":"'
         + deviceName
-        + 'MemoryUse","state_topic":"system-sensors/sensor/'
+        + 'MemoryUse","state_topic":"tel/19c/'
         + deviceName
         + '/state","unit_of_measurement":"%","value_template":"{{ value_json.memory_use}}","unique_id":"'
         + deviceName.lower()
@@ -280,7 +281,7 @@ def send_config_message(mqttClient):
         + "CpuUsage/config",
         payload='{"name":"'
         + deviceName
-        + 'CpuUsage","state_topic":"system-sensors/sensor/'
+        + 'CpuUsage","state_topic":"tel/19c/'
         + deviceName
         + '/state","unit_of_measurement":"%","value_template":"{{ value_json.cpu_usage}}","unique_id":"'
         + deviceName.lower()
@@ -302,7 +303,7 @@ def send_config_message(mqttClient):
         + "SwapUsage/config",
         payload='{"name":"'
         + deviceName
-        + 'SwapUsage","state_topic":"system-sensors/sensor/'
+        + 'SwapUsage","state_topic":"tel/19c/'
         + deviceName
         + '/state","unit_of_measurement":"%","value_template":"{{ value_json.swap_usage}}","unique_id":"'
         + deviceName.lower()
@@ -324,7 +325,7 @@ def send_config_message(mqttClient):
         + "PowerStatus/config",
         payload='{"name":"'
         + deviceName
-        + 'PowerStatus","state_topic":"system-sensors/sensor/'
+        + 'PowerStatus","state_topic":"tel/19c/'
         + deviceName
         + '/state","value_template":"{{ value_json.power_status}}","unique_id":"'
         + deviceName.lower()
@@ -346,7 +347,7 @@ def send_config_message(mqttClient):
         + "LastBoot/config",
         payload='{"device_class":"timestamp","name":"'
         + deviceName
-        + 'LastBoot","state_topic":"system-sensors/sensor/'
+        + 'LastBoot","state_topic":"tel/19c/'
         + deviceName
         + '/state","value_template":"{{ value_json.last_boot}}","unique_id":"'
         + deviceName.lower()
@@ -369,7 +370,7 @@ def send_config_message(mqttClient):
         + "LastMessage/config",
         payload='{"name":"'
         + deviceName
-        + 'LastMessage","state_topic":"system-sensors/sensor/'
+        + 'LastMessage","state_topic":"tel/19c/'
         + deviceName
         + '/state","value_template":"{{ value_json.updates}}","unique_id":"'
         + deviceName.lower()
@@ -397,7 +398,7 @@ def send_config_message(mqttClient):
                 + "Updates/config",
                 payload='{"name":"'
                 + deviceName
-                + 'Updates","state_topic":"system-sensors/sensor/'
+                + 'Updates","state_topic":"tel/19c/'
                 + deviceName
                 + '/state","value_template":"{{ value_json.updates}}","unique_id":"'
                 + deviceName.lower()
@@ -421,7 +422,7 @@ def send_config_message(mqttClient):
             + "WifiStrength/config",
             payload='{"device_class":"signal_strength","name":"'
             + deviceName
-            + 'WifiStrength","state_topic":"system-sensors/sensor/'
+            + 'WifiStrength","state_topic":"tel/19c/'
             + deviceName
             + '/state","unit_of_measurement":"dBm","value_template":"{{ value_json.wifi_strength}}","unique_id":"'
             + deviceName.lower()
@@ -449,7 +450,7 @@ def send_config_message(mqttClient):
                 + deviceName
                 + "DiskUse"
                 + drive
-                + '","state_topic":"system-sensors/sensor/'
+                + '","state_topic":"tel/19c/'
                 + deviceName
                 + '/state","unit_of_measurement":"%","value_template":"{{ value_json.disk_use_'
                 + drive.lower()
