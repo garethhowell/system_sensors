@@ -5,7 +5,7 @@ Documentation=https://www.github.com/garethhowell/system_sensors
 [Service]
 Type=simple
 Restart=on-failure
-ExecStart=/usr/local/bin/system_sensors /etc/system_sensors/settings.yaml
+ExecStart=/usr/local/bin/system_sensors.py /etc/system_sensors/settings.yaml
 
 [Install]
 WantedBy=multi-user.target

@@ -9,9 +9,9 @@ from setuptools import setup, find_packages
 # To use a consistent encoding
 from codecs import open
 import sys
-from system_sensors import __version__
 
 sys.path.insert(0, 'src')
+from system_sensors import __version__
 
 
 def readme():
@@ -56,7 +56,7 @@ setup(
         'PyYAML==5.2'
         ],
     data_files=[
-	    ('/etc/system_sensors', ['etc/system_sensors/settings.yaml.example']),
+	    ('/etc/system_sensors', ['etc/system_sensors/settings_example.yaml']),
         ('/etc/systemd/system', ['etc/systemd/system_sensors.service'])
 	],
     scripts=[
